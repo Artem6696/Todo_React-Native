@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     elevation: 4,
     //
     flexDirection: "row",
-    alignItems: "flex-start", // Расположение элементов вверху контейнера
+    alignItems: "center", // Расположение элементов вверху контейнера
     width: "90%",
     backgroundColor: "white",
     //Shadow for IOS
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     flex: 1, // Позволяет тексту занимать доступное пространство по высоте
     fontSize: 20,
     color: "#14213d",
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
+    maxWidth: "70%",
   },
 });
-export default TaskItem;
+export default TodoItem;

@@ -20,7 +20,7 @@ export const TodoList = ({ todos, setTodos }) => {
   };
 
   return (
-    <View style={{ width: "100%" }}>
+    <View style={{ flex: 1 }}>
       {/* <FlatList  contentContainerStyle={styles.tasksContainer}
         data={todos}
         renderItem={({ item, index }) => (
@@ -46,7 +46,8 @@ export const TodoList = ({ todos, setTodos }) => {
 
 const styles = StyleSheet.create({
   tasksContainer: {
-    flexGrow: 1, /// когда здесь ставил   height: '100%' прокрутка не работвала
+    flexGrow: 1,
+    //  flexGrow: 1, /// когда здесь ставил   height: '100%' прокрутка не работала ** у родительского компонента тоже должно быть flexGrow: 1,
     alignItems: "center",
   },
 });

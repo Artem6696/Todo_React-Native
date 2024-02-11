@@ -9,7 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
- 
+
   const handlerInputChange = (input) => {
     setInputValue(input);
   };

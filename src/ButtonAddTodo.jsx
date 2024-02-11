@@ -1,33 +1,3 @@
-// import React from 'react'
-// import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
-
-// const ButtonAddTodo = ({text}) => {
-//   return (
-//     // <View style={styles.container}>
-//         <TouchableOpacity style={styles.container} >
-//            <Text style={styles.buttonText}>{text}</Text>
-//         </TouchableOpacity>
-
-//   )
-// }
-// const styles = StyleSheet.create({
-//     container: {
-//         width: 80,
-//         height: 45,
-//         backgroundColor: '#e5e5e5',
-//         borderRadius: 10,
-//         marginRight: 20,
-//         justifyContent: 'center'
-//     },
-//     button: {
-
-//     },
-//     buttonText: {
-//         textAlign: 'center',
-//        color: '#14213d'
-//     }
-// })
-// export default ButtonAddTodo
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
