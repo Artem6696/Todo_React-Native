@@ -1,20 +1,62 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Alert, Keyboard, StyleSheet, Platform, View } from "react-native";
 
+import { Navbar } from "./src/Navbar";
+import { AddTodo } from "./src/AddTodo";
+import { useState } from "react";
+import { TaskList } from "./src/TaskList";
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function App() {
+  const [todos, setTodos] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  //передаю inputValue в атрибут value TextInput
+  const handlerInputChange = (input) => {
+    setInputValue(input);
+  };
+
+  const addTodo = () => {
+    if (inputValue.trim().length > 0) {
+      setTodos([...todos, inputValue]);
+      Keyboard.dismiss();
+      setInputValue("");
+    } else {
+      Alert.alert("Поле ввода не может быть пустым.");
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Navbar style={styles.navbar} title="Tasks" />
+      <View>
+        <AddTodo
+          handlerInputChange={handlerInputChange}
+          inputValue={inputValue}
+          addTodo={addTodo}
+        />
+      </View>
+      <TaskList todos={todos} setTodos={setTodos} />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColorL: "#FAFBFF",
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+
+    ...Platform.select({
+      ios: {
+        // backgroundColor: 'red',
+        paddingVertical: 40,
+      },
+      android: {
+        // backgroundColor: 'blue',
+      },
+    }),
+
+    // Constants из expo-constants
+    // paddingHorizontal: 20,
+    // paddingVertical: 20,
+    // backgroundColor: 'red'
   },
 });
