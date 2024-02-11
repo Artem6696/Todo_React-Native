@@ -20,11 +20,8 @@ export const AddTodo = ({ inputValue, handlerInputChange, addTodo }) => {
         autoCorrect={false}
       />
       <Text value="123" />
-    
       <ButtonAddTodo text="добавить" onPress={handleAddTodo} />
-
-        {/* <Button  color="black" textDecorationColor="white" style={styles.btn} onPress={handleAddTodo} title="Добавить" /> */}
-    
+      {/* <Button  color="black" textDecorationColor="white" style={styles.btn} onPress={handleAddTodo} title="Добавить" /> */}
     </View>
   );
 };
@@ -43,14 +40,14 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     margin: 12,
     padding: 12,
+    marginLeft: 20,
   },
   btnContainer: {
-backgroundColor: "red",
-color: "white",
-textDecorationColor: 'm'
+    backgroundColor: "red",
+    color: "white",
+    textDecorationColor: "m",
   },
   btn: {
-    
     color: "black",
   },
 });

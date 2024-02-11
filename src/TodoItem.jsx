@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const TaskItem = ({ todo, onDelete }) => {
+const TodoItem = ({ todo, onDelete }) => {
   return (
     <View>
       <View style={styles.todoElement}>
@@ -23,18 +23,16 @@ const TaskItem = ({ todo, onDelete }) => {
   );
 };
 const styles = StyleSheet.create({
-  tasksContainer: {
-    
+  container: {
     alignItems: "center",
   },
   todoElement: {
     //shadows for android
-    elevation: 4, 
+    elevation: 4,
     //
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start", // Расположение элементов вверху контейнера
     width: "90%",
-    height: 70,
     backgroundColor: "white",
     //Shadow for IOS
     borderRadius: 10,
@@ -46,12 +44,15 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     //
     marginVertical: 10,
+    paddingVertical: 10, // Добавим отступ сверху и снизу, чтобы было место для текста
+    paddingHorizontal: 20, // Добавим отступ слева и справа
     justifyContent: "space-between",
   },
   todoText: {
-    marginLeft: 25,
+    flex: 1, // Позволяет тексту занимать доступное пространство по высоте
     fontSize: 20,
-    color: "blue",
+    color: "#14213d",
+    flexWrap: 'wrap',
   },
 });
 export default TaskItem;

@@ -11,20 +11,10 @@ export const Navbar = ({ title }) => {
 
 const styles = StyleSheet.create({
   navbar: {
-    
     marginBottom: 20,
     height: 100,
     justifyContent: "center",
     alignItems: "center",
-    // ...Platform.select({
-    //   ios: {
-    //     backgroundColor: 'red',
-        
-    //   },
-    //   android: {
-    //     backgroundColor: 'red',
-    //   },
-    // }),
   },
   title: {
     fontSize: 60,

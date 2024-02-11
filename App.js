@@ -1,15 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { Alert, Keyboard, StyleSheet, Platform, View } from "react-native";
-
 import { Navbar } from "./src/Navbar";
 import { AddTodo } from "./src/AddTodo";
 import { useState } from "react";
-import { TaskList } from "./src/TaskList";
+import { TodoList } from "./src/TodoList";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  //передаю inputValue в атрибут value TextInput
+ 
   const handlerInputChange = (input) => {
     setInputValue(input);
   };
@@ -34,7 +34,7 @@ export default function App() {
           addTodo={addTodo}
         />
       </View>
-      <TaskList todos={todos} setTodos={setTodos} />
+      <TodoList todos={todos} setTodos={setTodos} />
     </SafeAreaView>
   );
 }
@@ -53,10 +53,5 @@ const styles = StyleSheet.create({
         // backgroundColor: 'blue',
       },
     }),
-
-    // Constants из expo-constants
-    // paddingHorizontal: 20,
-    // paddingVertical: 20,
-    // backgroundColor: 'red'
   },
 });

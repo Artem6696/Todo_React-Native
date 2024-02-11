@@ -10,9 +10,9 @@ import {
   Animated,
   FlatList,
 } from "react-native";
-import TaskItem from "./TaskItem";
+import TodoItem from "./TodoItem";
 
-export const TaskList = ({ todos, setTodos }) => {
+export const TodoList = ({ todos, setTodos }) => {
   const deleteTodo = (ind) => {
     const newTodos = [...todos];
     newTodos.splice(ind, 1);
@@ -20,7 +20,7 @@ export const TaskList = ({ todos, setTodos }) => {
   };
 
   return (
-    <View style={{ width: "100%"}}>
+    <View style={{ width: "100%" }}>
       {/* <FlatList  contentContainerStyle={styles.tasksContainer}
         data={todos}
         renderItem={({ item, index }) => (
@@ -33,7 +33,7 @@ export const TaskList = ({ todos, setTodos }) => {
       /> */}
       <ScrollView contentContainerStyle={styles.tasksContainer}>
         {todos.map((todo, index) => (
-          <TaskItem
+          <TodoItem
             todo={todo}
             key={index}
             onDelete={() => deleteTodo(index)}
@@ -46,7 +46,7 @@ export const TaskList = ({ todos, setTodos }) => {
 
 const styles = StyleSheet.create({
   tasksContainer: {
-    height: '100%',
+    flexGrow: 1, /// когда здесь ставил   height: '100%' прокрутка не работвала
     alignItems: "center",
   },
 });
