@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { Alert, Keyboard, StyleSheet, Platform, View } from "react-native";
-import { Navbar } from "./src/Navbar";
-import { AddTodo } from "./src/AddTodo";
+import { Navbar } from "./src/components/Navbar";
+import { AddTodo } from "./src/components/AddTodo";
 import { useState } from "react";
-import { TodoList } from "./src/TodoList";
+import { TodoList } from "./src/components/TodoList";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import MainScreen from "./src/screens/MainScreen";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -25,23 +26,24 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
+
       <Navbar style={styles.navbar} title="Tasks" />
-      <View>
-        <AddTodo
-          handlerInputChange={handlerInputChange}
-          inputValue={inputValue}
-          addTodo={addTodo}
-        />
-      </View>
-      <TodoList todos={todos} setTodos={setTodos} />
-    </SafeAreaView>
+
+      <MainScreen
+        todos={todos}
+        handlerInputChange={handlerInputChange}
+        inputValue={inputValue}
+        addTodo={addTodo}
+        setTodos={setTodos}
+      />
+
+    </GestureHandlerRootView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
-    backgroundColorL: "#FAFBFF",
+    backgroundColor: "#FAFBFF",
     flex: 1,
 
     ...Platform.select({
