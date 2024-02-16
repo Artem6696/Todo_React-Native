@@ -4,7 +4,7 @@ import { Navbar } from "./src/components/Navbar";
 import { AddTodo } from "./src/components/AddTodo";
 import { useState } from "react";
 import { TodoList } from "./src/components/TodoList";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import MainScreen from "./src/screens/MainScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function App() {
@@ -26,19 +26,21 @@ export default function App() {
   };
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ backgroundColor: "red", flex: 1 }}>
+        <GestureHandlerRootView style={styles.container}>
+          <Navbar style={styles.navbar} title="Tasks" />
 
-      <Navbar style={styles.navbar} title="Tasks" />
-
-      <MainScreen
-        todos={todos}
-        handlerInputChange={handlerInputChange}
-        inputValue={inputValue}
-        addTodo={addTodo}
-        setTodos={setTodos}
-      />
-
-    </GestureHandlerRootView>
+          <MainScreen
+            todos={todos}
+            handlerInputChange={handlerInputChange}
+            inputValue={inputValue}
+            addTodo={addTodo}
+            setTodos={setTodos}
+          />
+        </GestureHandlerRootView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 const styles = StyleSheet.create({
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         // backgroundColor: 'red',
-        paddingVertical: 40,
+        // paddingVertical: 40,
       },
       android: {
         // backgroundColor: 'blue',
