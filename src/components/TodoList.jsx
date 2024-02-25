@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Alert,
-  Modal,
-  Text,
-  TextInput,
-  Button,
-} from "react-native";
+import { View, StyleSheet, FlatList, Alert, Modal, Text, TextInput, Button } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -44,11 +35,11 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, status: statusUpd } : todo
     );
-   await saveTodos(updatedTodos);
+    await saveTodos(updatedTodos);
     setTodos(updatedTodos);
-    console.log('====================================');
+    console.log("====================================");
     console.log(updatedTodos);
-    console.log('====================================');
+    console.log("====================================");
   };
 
   return (
@@ -71,11 +62,7 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
 
       <Modal visible={isModalVisible} transparent animationType="fade">
         <View style={styles.modalContainer}>
-          <Animatable.View
-            style={styles.modalContainerInner}
-            animation="zoomInUp"
-            duration={800}
-          >
+          <Animatable.View style={styles.modalContainerInner} animation="zoomInUp" duration={800}>
             <Animatable.View animation="fadeIn" duration={500}>
               <AntDesign
                 style={{ marginBottom: 4 }}

@@ -21,7 +21,6 @@ export const AddTodo = ({ inputValue, handlerInputChange, addTodo }) => {
       />
       <Text value="123" />
       <ButtonAddTodo text="добавить" onPress={handleAddTodo} />
-      
     </View>
   );
 };

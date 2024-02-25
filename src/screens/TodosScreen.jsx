@@ -20,35 +20,33 @@ const TodosScreen = () => {
 
   useEffect(() => {
     saveTodos(todos);
-    console.log('====================================');
+    console.log("====================================");
     console.log(todos);
-    console.log('====================================');
+    console.log("====================================");
   }, [todos]);
 
   const loadTodos = async () => {
     try {
-      const savedTodos = await AsyncStorage.getItem('todos');
+      const savedTodos = await AsyncStorage.getItem("todos");
       if (savedTodos) {
         setTodos(JSON.parse(savedTodos));
       }
     } catch (error) {
-      console.error('Ошибка при загрузке задач из AsyncStorage:', error);
+      console.error("Ошибка при загрузке задач из AsyncStorage:", error);
     }
   };
 
   const saveTodos = async (updatedTodos) => {
     try {
-      await AsyncStorage.setItem('todos', JSON.stringify(updatedTodos));
+      await AsyncStorage.setItem("todos", JSON.stringify(updatedTodos));
     } catch (error) {
-      console.error('Ошибка при сохранении задач в AsyncStorage:', error);
+      console.error("Ошибка при сохранении задач в AsyncStorage:", error);
     }
   };
-  
-  
+
   const generateId = () => {
     let result = "";
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const charactersLength = characters.length;
 
     for (let i = 0; i < 10; i++) {
@@ -72,7 +70,7 @@ const TodosScreen = () => {
       setTodos([...todos, newTodo]);
       Keyboard.dismiss();
       setInputValue("");
-      console.log(todos)
+      console.log(todos);
     } else {
       Alert.alert("Поле ввода не может быть пустым.");
     }

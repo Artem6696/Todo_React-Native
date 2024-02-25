@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Pressable } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Svg, { Path } from "react-native-svg";
 import SelectDropdown from "react-native-select-dropdown";
@@ -43,14 +37,7 @@ const RightAction = ({ onDelete }) => {
     </View>
   );
 };
-const TodoItem = ({
-  todoTitle,
-  onDelete,
-  onPress,
-  handleEditStatus,
-  todoItem,
-  updateTodos,
-}) => {
+const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, updateTodos }) => {
   const todoStatus = ["planned", "in process", "is done"];
   return (
     <Swipeable renderRightActions={() => <RightAction onDelete={onDelete} />}>
@@ -64,8 +51,8 @@ const TodoItem = ({
                 buttonStyle={styles.dropDownBtn}
                 defaultValue={
                   todoItem.status !== "in process" && todoItem.status !== "is done"
-                  ? "planned"
-                  : todoItem.status
+                    ? "planned"
+                    : todoItem.status
                 }
                 onSelect={(selectedItem) => {
                   handleEditStatus(selectedItem);
