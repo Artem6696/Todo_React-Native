@@ -1,7 +1,14 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Svg, { Path } from "react-native-svg";
+import SelectDropdown from "react-native-select-dropdown";
 
 const RightAction = ({ onDelete }) => {
   return (
@@ -36,14 +43,41 @@ const RightAction = ({ onDelete }) => {
     </View>
   );
 };
-const TodoItem = ({ todo, onDelete, onLeftSwipe, onRightsPress }) => {
+const TodoItem = ({
+  todoTitle,
+  onDelete,
+  onPress,
+  handleEditStatus,
+  todoItem,
+  updateTodos,
+}) => {
+  const todoStatus = ["planned", "in process", "is done"];
   return (
     <Swipeable renderRightActions={() => <RightAction onDelete={onDelete} />}>
-      <View style={styles.todoContainer}>
-        <View style={{ width: "100%" }}>
-          <Text style={styles.todoText}>{todo}</Text>
+      <Pressable onLongPress={onPress} delayLongPress={400}>
+        <View style={styles.todoContainer}>
+          <View style={{ width: "100%" }}>
+            <Text style={styles.todoText}>{todoTitle}</Text>
+            <View style={styles.dropDown}>
+              <SelectDropdown
+                data={todoStatus}
+                buttonStyle={styles.dropDownBtn}
+                defaultValue={"planned"}
+                onSelect={(selectedItem) => {
+                  handleEditStatus(selectedItem);
+                }}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                  return selectedItem;
+                }}
+                rowTextForSelection={(item, index) => {
+                  return item;
+                }}
+                rowTextStyle={{}}
+              />
+            </View>
+          </View>
         </View>
-      </View>
+      </Pressable>
     </Swipeable>
   );
 };
@@ -70,6 +104,17 @@ const styles = StyleSheet.create({
     color: "#14213d",
     flexWrap: "wrap",
     maxWidth: "100%",
+  },
+  dropDown: {
+    alignItems: "flex-end",
+  },
+  dropDownBtn: {
+    width: 130,
+    backgroundColor: "white",
+    height: 25,
+    borderRadius: 6,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
