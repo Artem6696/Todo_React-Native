@@ -1,9 +1,9 @@
 import React from "react";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert, Keyboard, StyleSheet, Platform, View } from "react-native";
 import { Navbar } from "../components/Navbar";
 import { AddTodo } from "../components/AddTodo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TodoList } from "../components/TodoList";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -13,7 +13,35 @@ const TodosScreen = () => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [statusTodo, setStatusTodo] = useState("запланированно");
+  
+  useEffect(() => {
+    loadTodos();
+  }, []);
 
+  useEffect(() => {
+    saveTodos(todos);
+  }, [todos]);
+
+  const loadTodos = async () => {
+    try {
+      const savedTodos = await AsyncStorage.getItem('todos');
+      if (savedTodos) {
+        setTodos(JSON.parse(savedTodos));
+      }
+    } catch (error) {
+      console.error('Ошибка при загрузке задач из AsyncStorage:', error);
+    }
+  };
+
+  const saveTodos = async (updatedTodos) => {
+    try {
+      await AsyncStorage.setItem('todos', JSON.stringify(updatedTodos));
+    } catch (error) {
+      console.error('Ошибка при сохранении задач в AsyncStorage:', error);
+    }
+  };
+  
+  
   const generateId = () => {
     let result = "";
     const characters =
