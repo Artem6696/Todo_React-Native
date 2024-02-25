@@ -13,13 +13,16 @@ const TodosScreen = () => {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [statusTodo, setStatusTodo] = useState("запланированно");
-  
+
   useEffect(() => {
     loadTodos();
   }, []);
 
   useEffect(() => {
     saveTodos(todos);
+    console.log('====================================');
+    console.log(todos);
+    console.log('====================================');
   }, [todos]);
 
   const loadTodos = async () => {
@@ -87,7 +90,7 @@ const TodosScreen = () => {
             addTodo={addTodo}
           />
 
-          <TodoList todos={todos} setTodos={setTodos} />
+          <TodoList todos={todos} setTodos={setTodos} saveTodos={saveTodos} />
         </>
       </GestureHandlerRootView>
     </SafeAreaView>

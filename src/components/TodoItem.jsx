@@ -62,7 +62,11 @@ const TodoItem = ({
               <SelectDropdown
                 data={todoStatus}
                 buttonStyle={styles.dropDownBtn}
-                defaultValue={"planned"}
+                defaultValue={
+                  todoItem.status !== "in process" && todoItem.status !== "is done"
+                  ? "planned"
+                  : todoItem.status
+                }
                 onSelect={(selectedItem) => {
                   handleEditStatus(selectedItem);
                 }}

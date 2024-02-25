@@ -14,7 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import TodoItem from "./TodoItem";
 
-export const TodoList = ({ todos, setTodos }) => {
+export const TodoList = ({ todos, setTodos, saveTodos }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedTodoId, setSelectedTodoId] = useState(null);
   const [selectedTodoTitle, setSelectedTodoTitle] = useState("");
@@ -37,15 +37,18 @@ export const TodoList = ({ todos, setTodos }) => {
       todo.id === selectedTodoId ? { ...todo, title: selectedTodoTitle } : todo
     );
     setTodos(updatedTodos);
+    saveTodos(updatedTodos);
     setIsModalVisible(false);
   };
-  const handleEditStatus = ( statusUpd, id) => {
+  const handleEditStatus = async (statusUpd, id) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, status: statusUpd } : todo
-     
-    ); 
-    
-   setTodos(updatedTodos)
+    );
+   await saveTodos(updatedTodos);
+    setTodos(updatedTodos);
+    console.log('====================================');
+    console.log(updatedTodos);
+    console.log('====================================');
   };
 
   return (
@@ -56,7 +59,7 @@ export const TodoList = ({ todos, setTodos }) => {
         renderItem={({ item, index }) => (
           <TodoItem
             todoItem={item}
-            handleEditStatus={(status) => handleEditStatus( status , item.id)}
+            handleEditStatus={(status) => handleEditStatus(status, item.id)}
             todoTitle={item.title}
             key={index}
             onPress={() => handleEditTodo(item.id, item.title)}
