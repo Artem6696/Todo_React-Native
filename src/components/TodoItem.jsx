@@ -6,14 +6,21 @@ import constants from "../../constants";
 import SwipeDelete from "./action-todo/SwipeDelete";
 import { formatDate, formatTime } from "../../dateTimeUtils";
 const todoStatus = ["planned", "in process", "is done"];
+import DraggableFlatList, { ScaleDecorator } from "react-native-draggable-flatlist";
 
-const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, updateTodos }) => {
+const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, updateTodos, drag, isActive }) => {
   let time = new Date(todoItem.creationTime); // Convert to Date object
   let date = new Date(todoItem.creationTime);
 
   return (
     <Swipeable renderRightActions={() => <SwipeDelete onDelete={onDelete} />}>
-      <Pressable onLongPress={onPress} delayLongPress={400}>
+      <TouchableOpacity
+        onLongPress={drag}
+        disabled={isActive}
+        onPress={onPress}
+        delayLongPress={100}
+        style={styles.item}
+      >
         <View style={styles.todoContainer}>
           <View style={{ width: "100%" }}>
             <Text style={styles.todoTime}>
@@ -25,9 +32,7 @@ const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, up
                 data={todoStatus}
                 buttonStyle={styles.dropDownBtn}
                 defaultValue={
-                  todoItem.status !== "in process" && todoItem.status !== "is done"
-                    ? "planned"
-                    : todoItem.status
+                  todoItem.status !== "in process" && todoItem.status !== "is done" ? "planned" : todoItem.status
                 }
                 onSelect={(selectedItem) => {
                   handleEditStatus(selectedItem);
@@ -43,7 +48,7 @@ const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, up
             </View>
           </View>
         </View>
-      </Pressable>
+      </TouchableOpacity>
     </Swipeable>
   );
 };

@@ -1,5 +1,5 @@
 export default COLORS = {
-    Container: '#F3EEEA',
+    Container: '#FCF8E8',
     Todo: '#DF7861',
-    Navbar: '#FCF8E8'
+    Navbar: 'white'
 }
