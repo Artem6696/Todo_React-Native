@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Button, TextInput, StyleSheet, Text } from "react-native";
-import ButtonAddTodo from "./ButtonAddTodo";
-import constants from "../../constants";
+
+import ButtonAddTodo from "../ButtonAddTodo";
+import constants from "../../../constants";
 
 export const AddTodo = ({ inputValue, setInputValue, addTodo }) => {
   const handleAddTodo = () => {

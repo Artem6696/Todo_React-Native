@@ -16,7 +16,7 @@ function TabGroup() {
       // headerShown: false,
       tabBarShowLabel: false,
       headerStyle: { backgroundColor: constants.Navbar }, // установка цвета фона заголовка
-      headerTintColor: 'your_color_here', // установка цвета текста заголовка
+      // headerTintColor: 'your_color_here', // установка цвета текста заголовка
       // headerTitleStyle: { fontWeight: 'bold' }, // установка стиля текста заголовка
     }}
     >

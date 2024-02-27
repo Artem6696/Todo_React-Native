@@ -2,7 +2,7 @@ import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert, Keyboard, StyleSheet, Platform, View } from "react-native";
 import { Navbar } from "../components/Navbar";
-import { AddTodo } from "../components/AddTodo";
+import { AddTodo } from "../components/action-todo/AddTodo";
 import { useState, useEffect } from "react";
 import { TodoList } from "../components/TodoList";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
