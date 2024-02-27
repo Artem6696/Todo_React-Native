@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, Alert, Modal, Text, TextInput, Button } from "react-native";
+import { View, StyleSheet, FlatList, Alert, Modal, Text, TextInput, Button ,Platform, StatusBar } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -41,11 +41,20 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
     console.log(updatedTodos);
     console.log("====================================");
   };
+  const openModal = () => {
+    setIsModalVisible(true);
+    StatusBar.setBarStyle("light-content"); // Устанавливаем белый текст для статус-бара
+    StatusBar.setBackgroundColor("rgba(0, 0, 0, 0.5)"); // Устанавливаем цвет фона для статус-бара
+  };
 
+  const closeModal = () => {
+    setIsModalVisible(false);
+    StatusBar.setBarStyle("default"); // Сбрасываем стиль текста статус-бара на стандартный
+    StatusBar.setBackgroundColor("transparent"); // Сбрасываем цвет фона статус-бара на прозрачный
+  };
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.todoListContainer}>
       <FlatList
-        contentContainerStyle={styles.tasksContainer}
         data={todos}
         renderItem={({ item, index }) => (
           <TodoItem
@@ -97,10 +106,20 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
 };
 
 const styles = StyleSheet.create({
+  todoListContainer: {
+    flexGrow: 1,
+    ...Platform.select({
+      ios: {
+        paddingBottom: 170
+        // paddingVertical: 40,
+      },
+      android: {
+        // backgroundColor: 'blue',
+        flexBasis:1      },
+    }),
+  },
   tasksContainer: {
     gap: 2,
-    // flexGrow: 0,
-    flexGrow: 1, /// когда здесь ставил   height: '100%' прокрутка не работала ** у родительского компонента тоже должно быть flexGrow: 1,
     alignItems: "center",
   },
   modalContainer: {

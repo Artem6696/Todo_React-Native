@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Pressable } from "react-nativ
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Svg, { Path } from "react-native-svg";
 import SelectDropdown from "react-native-select-dropdown";
+import constants from "../../constants";
 
 const RightAction = ({ onDelete }) => {
   return (
@@ -39,12 +40,23 @@ const RightAction = ({ onDelete }) => {
 };
 const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, updateTodos }) => {
   const todoStatus = ["planned", "in process", "is done"];
+  let time = new Date(todoItem.creationTime); // Convert to Date object
+  let date = new Date(todoItem.creationTime);
+  let hours = time.getHours().toString().padStart(2, "0");
+  let minutes = time.getMinutes().toString().padStart(2, "0");
+  let month = (date.getMonth() + 1).toString().padStart(2, "0"); // Format month with leading zero
+  let day = date.getDate().toString().padStart(2, "0");
+ 
+ 
   return (
     <Swipeable renderRightActions={() => <RightAction onDelete={onDelete} />}>
       <Pressable onLongPress={onPress} delayLongPress={400}>
         <View style={styles.todoContainer}>
           <View style={{ width: "100%" }}>
-            <Text style={styles.todoText}>{todoTitle}</Text>
+          <Text style={styles.todoTime}>
+              {day}:{month} | {hours}:{minutes}
+            </Text>
+            <Text style={styles.todoText}>{todoTitle}</Text>        
             <View style={styles.dropDown}>
               <SelectDropdown
                 data={todoStatus}
@@ -76,8 +88,8 @@ const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, up
 const styles = StyleSheet.create({
   todoContainer: {
     flexDirection: "row",
-    width: "100%",
-    backgroundColor: "#e7ecef",
+    width: "100",
+    backgroundColor: constants.Todo,
     borderBottomColor: "grey",
     borderBottomWidth: 0.2,
     marginVertical: 1,
@@ -107,6 +119,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  todoTime: {
+    marginLeft: 'auto',
+    fontSize: 10
+  }
 });
 
 export default TodoItem;

@@ -5,11 +5,13 @@ import { Navbar } from "../components/Navbar";
 import { AddTodo } from "../components/AddTodo";
 import { useState, useEffect } from "react";
 import { TodoList } from "../components/TodoList";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import constants from "../../constants";
 
 const TodosScreen = () => {
+  const insets = useSafeAreaInsets();
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [statusTodo, setStatusTodo] = useState("запланированно");
@@ -55,9 +57,7 @@ const TodosScreen = () => {
     return result;
   };
 
-  const handlerInputChange = (input) => {
-    setInputValue(input);
-  };
+ 
 
   const addTodo = () => {
     if (inputValue.trim().length > 0) {
@@ -77,37 +77,37 @@ const TodosScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <GestureHandlerRootView style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
+      <View style={{}}>
         <Navbar style={styles.navbar} title="Tasks" />
 
-        <>
-          <AddTodo
-            handlerInputChange={handlerInputChange}
-            inputValue={inputValue}
-            addTodo={addTodo}
-          />
+        <AddTodo
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          addTodo={addTodo}
+        />
+      </View>
 
-          <TodoList todos={todos} setTodos={setTodos} saveTodos={saveTodos} />
-        </>
-      </GestureHandlerRootView>
-    </SafeAreaView>
+      <TodoList todos={todos} setTodos={setTodos} saveTodos={saveTodos} />
+    </GestureHandlerRootView>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FAFBFF",
-    flex: 1,
+    height: "100%",
 
     ...Platform.select({
       ios: {
-        // backgroundColor: 'red',
         // paddingVertical: 40,
       },
       android: {
         // backgroundColor: 'blue',
       },
     }),
+  },
+  containerBOX: {
+    backgroundColor: constants.Container,
+    flex: 1,
   },
 });
 

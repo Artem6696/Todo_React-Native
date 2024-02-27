@@ -1,25 +1,23 @@
 import React from "react";
 import { View, Button, TextInput, StyleSheet, Text } from "react-native";
 import ButtonAddTodo from "./ButtonAddTodo";
+import constants from "../../constants";
 
-export const AddTodo = ({ inputValue, handlerInputChange, addTodo }) => {
-  const handleInputChange = (text) => {
-    handlerInputChange(text);
-  };
+export const AddTodo = ({ inputValue, setInputValue, addTodo }) => {
   const handleAddTodo = () => {
     addTodo();
   };
+
   return (
     <View style={styles.block}>
       <TextInput
         style={styles.input}
         placeholder="Введите текст"
         value={inputValue}
-        onChangeText={handleInputChange}
+        onChangeText={(text) => setInputValue(text)}
         autoCapitalize="none"
         autoCorrect={false}
       />
-      <Text value="123" />
       <ButtonAddTodo text="добавить" onPress={handleAddTodo} />
     </View>
   );
@@ -28,8 +26,9 @@ const styles = StyleSheet.create({
   block: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 30,
+    paddingBottom: 20,
     alignItems: "center",
+    backgroundColor: constants.Navbar,
   },
   input: {
     height: 40,
@@ -42,9 +41,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   btnContainer: {
-    backgroundColor: "red",
     color: "white",
-    textDecorationColor: "m",
   },
   btn: {
     color: "black",
