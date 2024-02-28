@@ -18,7 +18,7 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
   };
 
   const handleEditTodo = (id, title) => {
-    console.warn(id);
+    
     setSelectedTodoId(id);
     setIsModalVisible(true);
     setSelectedTodoTitle(title);

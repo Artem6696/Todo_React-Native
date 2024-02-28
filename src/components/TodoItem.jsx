@@ -5,13 +5,29 @@ import SelectDropdown from "react-native-select-dropdown";
 import constants from "../../constants";
 import SwipeDelete from "./action-todo/SwipeDelete";
 import { formatDate, formatTime } from "../../dateTimeUtils";
+
 const todoStatus = ["planned", "in process", "is done"];
-import DraggableFlatList, { ScaleDecorator } from "react-native-draggable-flatlist";
+const statusColors = {
+  'in process': '#63a6d9',
+  'is done': '#c27a9d',
+  'planned': '#8cbe77',
+};
 
 const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, updateTodos, drag, isActive }) => {
   let time = new Date(todoItem.creationTime); // Convert to Date object
   let date = new Date(todoItem.creationTime);
+  const statusColor = statusColors[todoItem.status] || '#8cbe77';
 
+  
+ 
+  const buttonStyle = {
+    width: 130,
+    backgroundColor: statusColor,
+    height: 25,
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
   return (
     <Swipeable renderRightActions={() => <SwipeDelete onDelete={onDelete} />}>
       <TouchableOpacity
@@ -30,7 +46,7 @@ const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, up
             <View style={styles.dropDown}>
               <SelectDropdown
                 data={todoStatus}
-                buttonStyle={styles.dropDownBtn}
+                buttonStyle={buttonStyle}
                 defaultValue={
                   todoItem.status !== "in process" && todoItem.status !== "is done" ? "planned" : todoItem.status
                 }
@@ -77,7 +93,7 @@ const styles = StyleSheet.create({
   },
   dropDownBtn: {
     width: 130,
-    backgroundColor: "white",
+  
     height: 25,
     borderRadius: 6,
     justifyContent: "center",
