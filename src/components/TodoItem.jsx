@@ -8,35 +8,27 @@ import { formatDate, formatTime } from "../../dateTimeUtils";
 
 const todoStatus = ["planned", "in process", "is done"];
 const statusColors = {
-  'in process': '#63a6d9',
-  'is done': '#c27a9d',
-  'planned': '#8cbe77',
+  "in process": "#63a6d9",
+  "is done": "#c27a9d",
+  planned: "#8cbe77",
 };
 
 const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, updateTodos, drag, isActive }) => {
   let time = new Date(todoItem.creationTime); // Convert to Date object
   let date = new Date(todoItem.creationTime);
-  const statusColor = statusColors[todoItem.status] || '#8cbe77';
+  const statusColor = statusColors[todoItem.status] || "#8cbe77";
 
-  
- 
   const buttonStyle = {
     width: 130,
     backgroundColor: statusColor,
     height: 25,
     borderRadius: 6,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   };
   return (
     <Swipeable renderRightActions={() => <SwipeDelete onDelete={onDelete} />}>
-      <TouchableOpacity
-        onLongPress={drag}
-        disabled={isActive}
-        onPress={onPress}
-        delayLongPress={100}
-        style={styles.item}
-      >
+      <TouchableOpacity onLongPress={drag} disabled={isActive} onPress={onPress} delayLongPress={100} style={styles.item}>
         <View style={styles.todoContainer}>
           <View style={{ width: "100%" }}>
             <Text style={styles.todoTime}>
@@ -47,9 +39,8 @@ const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, up
               <SelectDropdown
                 data={todoStatus}
                 buttonStyle={buttonStyle}
-                defaultValue={
-                  todoItem.status !== "in process" && todoItem.status !== "is done" ? "planned" : todoItem.status
-                }
+                buttonTextStyle={{color: 'white'}}
+                defaultValue={todoItem.status !== "in process" && todoItem.status !== "is done" ? "planned" : todoItem.status}
                 onSelect={(selectedItem) => {
                   handleEditStatus(selectedItem);
                 }}
@@ -60,6 +51,7 @@ const TodoItem = ({ todoTitle, onDelete, onPress, handleEditStatus, todoItem, up
                   return item;
                 }}
                 rowTextStyle={{}}
+                
               />
             </View>
           </View>
@@ -87,13 +79,15 @@ const styles = StyleSheet.create({
     color: "#14213d",
     flexWrap: "wrap",
     maxWidth: "100%",
+    
   },
   dropDown: {
     alignItems: "flex-end",
+    
   },
   dropDownBtn: {
     width: 130,
-  
+    
     height: 25,
     borderRadius: 6,
     justifyContent: "center",
@@ -102,6 +96,7 @@ const styles = StyleSheet.create({
   todoTime: {
     marginLeft: "auto",
     fontSize: 10,
+    
   },
 });
 

@@ -18,6 +18,7 @@ export const AddTodo = ({ inputValue, setInputValue, addTodo }) => {
         onChangeText={(text) => setInputValue(text)}
         autoCapitalize="none"
         autoCorrect={false}
+       
       />
       <ButtonAddTodo text="добавить" onPress={handleAddTodo} />
     </View>
@@ -32,14 +33,15 @@ const styles = StyleSheet.create({
     backgroundColor: constants.Navbar,
   },
   input: {
-    height: 40,
-    width: "60%",
+    height: 44,
+    width: "65%",
     borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "grey",
+    borderWidth: 1.5,
+    borderColor: "#ccc",
     margin: 12,
     padding: 12,
     marginLeft: 20,
+    borderRadius: 5,
   },
   btnContainer: {
     color: "white",

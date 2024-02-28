@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Platform, } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import DraggableFlatList from "react-native-draggable-flatlist";
 
 import TodoItem from "./TodoItem";
@@ -11,14 +11,12 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
   const [selectedTodoId, setSelectedTodoId] = useState(null);
   const [selectedTodoTitle, setSelectedTodoTitle] = useState("");
 
-  const deleteTodo = (ind) => {
-    const newTodos = [...todos]; //создаем копию которая не мутирует
-    newTodos.splice(ind, 1);
+  const deleteTodo = (id) => {
+    const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
   };
 
   const handleEditTodo = (id, title) => {
-    
     setSelectedTodoId(id);
     setIsModalVisible(true);
     setSelectedTodoTitle(title);
@@ -44,7 +42,7 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
   return (
     <View style={styles.todoListContainer}>
       <DraggableFlatList
-      contentContainerStyle={{ padding: 18, paddingBottom: 400, gap: 10}}
+        contentContainerStyle={{ padding: 18, paddingBottom: 400, gap: 10 }}
         data={todos || []}
         onDragEnd={({ data }) => {
           setTodos(data);
@@ -58,21 +56,20 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
             todoTitle={item.title}
             key={index}
             onPress={() => handleEditTodo(item.id, item.title)}
-            onDelete={() => deleteTodo(index)}
+            onDelete={() => deleteTodo(item.id)}
             updatedTodos={todos}
             drag={drag}
             isActive={isActive}
           />
-          
         )}
-      
       />
       <ModalEdit
-        isModalVisible={isModalVisible} 
-        setIsModalVisible={setIsModalVisible} 
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
         selectedTodoTitle={selectedTodoTitle}
+        setSelectedTodoTitle={setSelectedTodoTitle}
         editTodoTitle={editTodoTitle}
-        />
+      />
     </View>
   );
 };
@@ -80,7 +77,7 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
 const styles = StyleSheet.create({
   todoListContainer: {
     flexGrow: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     ...Platform.select({
       ios: {
         // paddingBottom: 170,
@@ -96,5 +93,4 @@ const styles = StyleSheet.create({
     gap: 2,
     alignItems: "center",
   },
-
 });
