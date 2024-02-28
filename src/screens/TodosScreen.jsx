@@ -57,8 +57,6 @@ const TodosScreen = () => {
     return result;
   };
 
- 
-
   const addTodo = () => {
     if (inputValue.trim().length > 0) {
       const newTodo = {
@@ -77,19 +75,17 @@ const TodosScreen = () => {
   };
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <View style={{}}>
-        <Navbar style={styles.navbar} title="Tasks" />
+    <SafeAreaView>
+      <GestureHandlerRootView style={styles.container}>
+        <View style={{}}>
+          <Navbar style={styles.navbar} title="Tasks" />
 
-        <AddTodo
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          addTodo={addTodo}
-        />
-      </View>
+          <AddTodo inputValue={inputValue} setInputValue={setInputValue} addTodo={addTodo} />
+        </View>
 
-      <TodoList todos={todos} setTodos={setTodos} saveTodos={saveTodos} />
-    </GestureHandlerRootView>
+        <TodoList todos={todos} setTodos={setTodos} saveTodos={saveTodos} />
+      </GestureHandlerRootView>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
