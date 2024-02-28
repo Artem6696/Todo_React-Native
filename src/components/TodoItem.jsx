@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: constants.Todo,
     borderBottomColor: "grey",
     borderBottomWidth: 0.2,
-    marginVertical: 1,
+    borderRadius: 10,
     paddingVertical: 20, // Добавим отступ сверху и снизу, чтобы было место для текста
     paddingHorizontal: 20, // Добавим отступ слева и справа
   },
