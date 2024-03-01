@@ -11,10 +11,10 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import constants from "../../constants";
 
 const TodosScreen = () => {
-
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [statusTodo, setStatusTodo] = useState("запланированно");
+  const [statusTodo, setStatusTodo] = useState("planned");
+  const [filterStatus, setFilterStatus] = useState("all");
 
   useEffect(() => {
     loadTodos();
@@ -29,7 +29,9 @@ const TodosScreen = () => {
     try {
       const savedTodos = await AsyncStorage.getItem("todos");
       if (savedTodos) {
-        setTodos(JSON.parse(savedTodos));
+        const parsedTodos = JSON.parse(savedTodos);
+      
+        setTodos(parsedTodos);
       }
     } catch (error) {
       console.error("Ошибка при загрузке задач из AsyncStorage:", error);
@@ -73,26 +75,31 @@ const TodosScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{backgroundColor: constants.Navbar}}>
+    <SafeAreaView style={{ backgroundColor: constants.Navbar }}>
       <GestureHandlerRootView style={styles.container}>
         <View style={{}}>
-          <Navbar style={styles.navbar} title="Tasks" />
-          <AddTodo
-            inputValue={inputValue} 
-            setInputValue={setInputValue}
-            addTodo={addTodo} />
+          <Navbar style={styles.navbar} title="Tasks" setFilterStatus={setFilterStatus} />
+          <AddTodo 
+           inputValue={inputValue}
+           setInputValue={setInputValue}
+           addTodo={addTodo}
+           />
         </View>
-        <TodoList 
+        <TodoList
           todos={todos}
+          
           setTodos={setTodos}
-          saveTodos={saveTodos} />
+          saveTodos={saveTodos}
+          filterStatus={filterStatus}
+          setFilterStatus={setFilterStatus}
+        />
       </GestureHandlerRootView>
     </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    height: "100%",
 
     ...Platform.select({
       ios: {
