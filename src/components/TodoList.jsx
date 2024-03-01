@@ -12,19 +12,21 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
   const [selectedTodoTitle, setSelectedTodoTitle] = useState("");
 
   const deleteTodo = (id) => {
-    const newTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(newTodos);
+    const newTodos = todos.filter((todo) => todo.id !== id); //создает новый массив за исключением того id
+    setTodos(newTodos);                                       //что  был переданный в функцию
   };
 
-  const handleEditTodo = (id, title) => {
-    setSelectedTodoId(id);
+  const handleEditTodo = (id, title) => { //прокидываем эту функцию чтоб после onPress
+    setSelectedTodoId(id);               //в стейтах сохранились выбранные Title и ID
     setIsModalVisible(true);
     setSelectedTodoTitle(title);
+    console.warn(id, title)
   };
   const editTodoTitle = () => {
     const updatedTodos = todos.map((todo) =>
-      // оставляем остальные свойства внутри todo, меняем только title
+      //в стейтах хронятся текущие значения на которые мы нажали OnPress
       todo.id === selectedTodoId ? { ...todo, title: selectedTodoTitle } : todo
+      // оставляем остальные свойства внутри todo, меняем только title
     );
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
@@ -34,17 +36,15 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
     const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, status: statusUpd } : todo));
     await saveTodos(updatedTodos);
     setTodos(updatedTodos);
-    console.log("====================================");
     console.log(updatedTodos);
-    console.log("====================================");
   };
 
   return (
     <View style={styles.todoListContainer}>
       <DraggableFlatList
-        contentContainerStyle={{ padding: 18, paddingBottom: 400, gap: 10 }}
+        contentContainerStyle={{ paddingLeft: 18, paddingRight: 18, paddingBottom: 400, gap: 10 }}
         data={todos || []}
-        onDragEnd={({ data }) => {
+        onDragEnd={({ data }) => {  //  обновляет массив после перетаскивания и сохраняет
           setTodos(data);
           saveTodos(data);
         }}
@@ -77,7 +77,7 @@ export const TodoList = ({ todos, setTodos, saveTodos }) => {
 const styles = StyleSheet.create({
   todoListContainer: {
     flexGrow: 1,
-    backgroundColor: "white",
+    backgroundColor: constants.Container,
     ...Platform.select({
       ios: {
         // paddingBottom: 170,

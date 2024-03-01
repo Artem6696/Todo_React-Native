@@ -12,6 +12,7 @@ const SwipeDelete = ({ onDelete }) => {
         justifyContent: "center",
         paddingVertical: 20,
         marginVertical: 1,
+        borderRadius: 5,
       }}
     >
       <View style={{ alignItems: "center" }}>

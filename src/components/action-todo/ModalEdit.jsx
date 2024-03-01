@@ -3,6 +3,7 @@ import { View, StyleSheet, FlatList, Alert, Modal, Text, TextInput, Button, Plat
 import * as Animatable from "react-native-animatable";
 import { AntDesign } from "@expo/vector-icons";
 import DraggableFlatList from "react-native-draggable-flatlist";
+import ButtonEditTodo from "../Button";
 const ModalEdit = ({
   isModalVisible,
   setIsModalVisible,
@@ -28,15 +29,20 @@ const ModalEdit = ({
             <Text style={styles.headlineText}> Изменить задачу: </Text>
           </Animatable.View>
           <View style={styles.modalContent}>
-            <Text>  </Text>
-            <TextInput multiline={true} style={styles.inputText} value={selectedTodoTitle} onChangeText={(text) => setSelectedTodoTitle(text)} />
+            <TextInput
+              multiline={true}
+              style={styles.inputText}
+              value={selectedTodoTitle}
+              onChangeText={(text) => setSelectedTodoTitle(text)}
+            />
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "center",
+                justifyContent: "flex-end",
               }}
             >
-              <Button title="Save" onPress={editTodoTitle} />
+              {/* <Button title="Save" onPress={editTodoTitle} /> */}
+              <ButtonEditTodo text="изменить" onPress={editTodoTitle} />
             </View>
           </View>
         </Animatable.View>
@@ -58,6 +64,7 @@ const styles = StyleSheet.create({
   inputText: {
     paddingLeft: 30,
     paddingRight: 30,
+    paddingBottom: 20,
     flexWrap: "wrap",
   },
   modalContainer: {

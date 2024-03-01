@@ -5,13 +5,13 @@ import { Navbar } from "../components/Navbar";
 import { AddTodo } from "../components/action-todo/AddTodo";
 import { useState, useEffect } from "react";
 import { TodoList } from "../components/TodoList";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import constants from "../../constants";
 
 const TodosScreen = () => {
-  const insets = useSafeAreaInsets();
+
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [statusTodo, setStatusTodo] = useState("запланированно");
@@ -22,9 +22,7 @@ const TodosScreen = () => {
 
   useEffect(() => {
     saveTodos(todos);
-    console.log("====================================");
     console.log(todos);
-    console.log("====================================");
   }, [todos]);
 
   const loadTodos = async () => {
@@ -75,22 +73,26 @@ const TodosScreen = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: constants.Navbar}}>
       <GestureHandlerRootView style={styles.container}>
         <View style={{}}>
           <Navbar style={styles.navbar} title="Tasks" />
-
-          <AddTodo inputValue={inputValue} setInputValue={setInputValue} addTodo={addTodo} />
+          <AddTodo
+            inputValue={inputValue} 
+            setInputValue={setInputValue}
+            addTodo={addTodo} />
         </View>
-
-        <TodoList todos={todos} setTodos={setTodos} saveTodos={saveTodos} />
+        <TodoList 
+          todos={todos}
+          setTodos={setTodos}
+          saveTodos={saveTodos} />
       </GestureHandlerRootView>
     </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    height: '100%',
 
     ...Platform.select({
       ios: {
